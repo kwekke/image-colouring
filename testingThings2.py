@@ -92,7 +92,7 @@ def generateFlowerImages(L, AB, ids):
 '''
 train Background and Flower individually
 '''
-# X_train, Y_train = loadBackgroundImageData(trainIds)
+# X_train, Y_train = loadFlowerImageData(trainIds)
 #
 # gpus = tf.config.experimental.list_physical_devices('GPU')
 # if gpus:
@@ -113,22 +113,22 @@ train Background and Flower individually
 # model.fit(x=X_train,
 #             y=Y_train,
 #             batch_size=64,
-#             epochs=1)
+#             epochs=1000)
 #
-# model.save("models/CIE94model_Background_10_20_64_1")
+# model.save("models/CIE94model_Flower_10_20_64_1000")
 
 
 #### test
 '''
 test Background and Flower individually
 '''
-X_test, Y_test = loadBackgroundImageData(testIds)
-X_train, Y_train = loadBackgroundImageData(trainIds)
+X_test, Y_test = loadFlowerImageData(testIds)
+X_train, Y_train = loadFlowerImageData(trainIds)
 
-model = keras.models.load_model("models/CIE94model_Background_10_20_32_1")
+model = keras.models.load_model("models/CIE94model_Flower_10_20_32_1000")
 
-model.evaluate(X_test, Y_test, batch_size=1)
-model.evaluate(X_train, Y_train, batch_size=1)
+model.evaluate(X_test, Y_test, batch_size=64)
+model.evaluate(X_train, Y_train, batch_size=64)
 # predictions = model.predict(X_test)
 # generateBackgroundImages(X_test, predictions * 127, testIds)
 
